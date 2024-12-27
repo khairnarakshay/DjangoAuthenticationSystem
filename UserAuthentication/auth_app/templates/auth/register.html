@@ -1,0 +1,53 @@
+ {% extends "layout/app.html" %}"
+
+ {% block title %}Register{% endblock title %}
+
+ {% block content %}
+
+    <div class="row justify-content-center">
+        <div class="col-sm-6">
+            <h2 class="text-muted">Register</h2>
+                <!-- Check if the form has non-field errors -->
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {% for error in form.non_field_errors %}
+                     <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+         {% endif %}
+                    <form action="{% url 'register' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for = "{{form.username.id_for_label}}">Username</label>
+                            <input type="text" name="{{form.username.name}}" class="form-control" Required>
+                            
+                            
+                        </div>
+
+                        <div class="form-group">
+                            <label for = "{{form.email.id_for_label}}">Email</label>
+                            <input type="text" name="{{form.email.name}}" class="form-control" Required>
+                            <span class="text-danger">{{form.email.errors}}</span>
+                            
+                        </div>
+                        <div class="form-group">
+                            <label for = "{{form.password1.id_for_label}}">Password</label>
+                            <input type="password" name="{{form.password1.name}}" class="form-control" Required>
+                            <span class="text-danger">{{form.password1.errors}}</span>
+                        </div>
+
+                        
+
+                        <div class="form-group">
+                            <label for = "{{form.password2.id_for_label}}">Re-Type Password</label>
+                            <input type="password" name="{{form.password2.name}}" class="form-control" Required>
+                            <span class="text-danger">{{form.password2.errors}}</span>
+                        </div>
+                        <button type="submit" class="btn btn-dark">Submit</button>
+                        <a href={% url 'login' %}>Login Here</a>
+                    </form>
+                
+             
+        </div>
+    </div>
+{% endblock content %}
